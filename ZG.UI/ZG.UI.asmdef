@@ -2,7 +2,8 @@
     "name": "ZG.UI",
     "rootNamespace": "",
     "references": [
-        "GUID:beff58cf91ef5dc4f8939ec84aca2109"
+        "GUID:beff58cf91ef5dc4f8939ec84aca2109",
+        "GUID:2c1228e76f4116f4ebe21c6ae96fe339"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

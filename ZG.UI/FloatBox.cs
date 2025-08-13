@@ -42,6 +42,7 @@ namespace ZG
         private int __count;
         private bool __isPointerEnter;
 
+        [UnityEngine.Scripting.Preserve]
         public Vector2 position
         {
             set
