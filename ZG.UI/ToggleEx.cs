@@ -123,7 +123,7 @@ namespace ZG
         [SerializeField]
         internal bool _isInstance;
 
-        private bool __isInstance;
+        //private bool __isInstance;
 
         private bool __oldStatus;
 
@@ -361,7 +361,7 @@ namespace ZG
 
             if (_isInstance)
             {
-                __isInstance = true;
+                //__isInstance = true;
 
                 __Awake();
             }
