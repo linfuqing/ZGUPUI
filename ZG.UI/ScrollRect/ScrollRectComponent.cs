@@ -41,7 +41,7 @@ namespace ZG
             }
         }*/
 
-        public float2 GetNormalizedPosition(in int2 index, in int2 count, float offsetScale)
+        public float2 GetNormalizedPosition(in int2 count, in float2 index, float offsetScale)
         {
             float2 cellLength = GetCellLength(count), offset = GetOffset(cellLength, offsetScale);
             return (index * cellLength + offset) / length;
@@ -702,20 +702,26 @@ namespace ZG
                 node.normalizedPosition -= math.select(float2.zero, node.velocity / length, length > math.FLT_MIN_NORMAL) * deltaTime;
 
                 node.normalizedPosition = math.saturate(node.normalizedPosition);
+
+                float2 index = instance.GetIndex(count, node.normalizedPosition, length, cellLength, offset);
                 
-                node.index = instance.GetIndex(count, node.normalizedPosition, length, cellLength, offset);
-                
-                int2 target = (int2)math.round(node.index);
+                int2 target = (int2)math.round(index);
 
                 ScrollRectEvent.Flag flag = 0;
-                if (!math.all(origin == target))
+                if (!origin.Equals(target))
                     flag |= ScrollRectEvent.Flag.Changed;
 
-                if (info.isVail != 0 && math.all(info.index == target))
+                IsChangedTo(node.index.x, index.x, out target.x);
+                IsChangedTo(node.index.y, index.y, out target.y);
+                
+                node.index = index;
+
+                if (info.isVail != 0 && info.index.Equals(target))
                 {
                     flag |= ScrollRectEvent.Flag.SameAsInfo;
 
                     node.velocity = float2.zero;
+                    node.normalizedPosition = instance.GetNormalizedPosition(count, target, offsetScale);
                 }
 
                 //nodes[index] = node;
@@ -781,6 +787,19 @@ namespace ZG
                     result.flag = flag;
                     result.index = node.index;
                 }
+            }
+
+            private bool IsChangedTo(float from, float to, out int target)
+            {
+                if (from < to)
+                {
+                    target = (int)math.floor(to);
+                    
+                    return target != (int)math.floor(from);
+                }
+                
+                target = (int)math.ceil(to);
+                return target != (int)math.ceil(from);
             }
         }
 
