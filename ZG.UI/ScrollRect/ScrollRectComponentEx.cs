@@ -193,14 +193,22 @@ namespace ZG
             return index < 0 || index >= (__toggles == null ? 0 : __toggles.Count) ? null : __toggles[__submitHandlers[index]];
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void Next()
         {
             Move(1);
         }
 
+        [UnityEngine.Scripting.Preserve]
         public void Previous()
         {
             Move(-1);
+        }
+
+        [UnityEngine.Scripting.Preserve]
+        public void MoveToEnd()
+        {
+            MoveTo(length - 1);
         }
 
         public void SetTo(int index)  => MoveTo(index);
