@@ -607,7 +607,8 @@ namespace ZG
         {
             __EnableNode();
             
-            __info.status = ScrollRectStatus.Normal;
+            if(__info.status == ScrollRectStatus.Fix)
+                __info.status = ScrollRectStatus.Normal;
             
             /*ScrollRectInfo info;
             info.isVail = true;
