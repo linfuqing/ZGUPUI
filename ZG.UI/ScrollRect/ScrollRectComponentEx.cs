@@ -243,10 +243,8 @@ namespace ZG
             int2 source = selectedIndex;
             /*if (math.all(source == destination))
                 return false;*/
-            if (source.Equals(destination))
-                return;
-            
-            __Update(math.max(source.x, source.y), math.max(destination.x, destination.y));
+            if (!source.Equals(destination))
+                __Update(math.max(source.x, source.y), math.max(destination.x, destination.y));
 
             __selectedIndex = destination;
             
