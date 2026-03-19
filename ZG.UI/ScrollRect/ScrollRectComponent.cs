@@ -718,7 +718,7 @@ namespace ZG
                 
                 node.index = index;
 
-                if (info.status != ScrollRectStatus.Normal && info.index.Equals(target))
+                if (info.status == ScrollRectStatus.Force && info.index.Equals(target))
                 {
                     flag |= ScrollRectEvent.Flag.SameAsInfo;
 
