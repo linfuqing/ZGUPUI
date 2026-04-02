@@ -4,6 +4,8 @@
     {
         public Progressbar[] instances;
 
+        public Progressbar[] invertInstances;
+
         public override float value
         {
             get
@@ -21,7 +23,16 @@
                             instance.value = value;
                     }
                 }
-
+                
+                if(invertInstances != null)
+                {
+                    foreach(Progressbar instance in invertInstances)
+                    {
+                        if (instance != null)
+                            instance.value = 1.0f - value;
+                    }
+                }
+                
                 base.value = value;
             }
         }
@@ -36,7 +47,16 @@
                         instance.Reset(value);
                 }
             }
-
+            
+            if (instances != null)
+            {
+                foreach (Progressbar instance in invertInstances)
+                {
+                    if (instance != null)
+                        instance.Reset(1.0f - value);
+                }
+            }
+            
             base.Reset(value);
         }
     }
