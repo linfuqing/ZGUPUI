@@ -15,21 +15,18 @@ namespace ZG.UI
 
         public override float value
         {
-            get
-            {
-                return __value;
-            }
+            get => __value;
 
             set
             {
                 base.value = value;
 
-                if (!isActiveAndEnabled)
+                /*if (!isActiveAndEnabled)
                 {
                     __value = value;
 
                     image.fillAmount = isInvert ? 1.0f - value : value;
-                }
+                }*/
             }
         }
 
