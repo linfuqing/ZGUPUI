@@ -240,14 +240,16 @@ namespace ZG
             if (__isMoving)
                 return;
 
-            int2 source = selectedIndex;
+            int2 source = index;
             /*if (math.all(source == destination))
                 return false;*/
             if (!source.Equals(destination))
+            {
                 __Update(math.max(source.x, source.y), math.max(destination.x, destination.y));
 
-            __selectedIndex = destination;
-            
+                __selectedIndex = destination;
+            }
+
             base.MoveTo(destination);
         }
 
