@@ -222,6 +222,8 @@ namespace ZG
 
             private set;
         } = new int2(-1, -1);
+        
+        public int2 targetIndex => __info.status == ScrollRectStatus.Normal ? index : __info.index;
 
         public ScrollRectData data
         {
