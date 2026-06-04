@@ -718,8 +718,6 @@ namespace ZG
                 IsChangedTo(node.index.x, index.x, out target.x);
                 IsChangedTo(node.index.y, index.y, out target.y);
                 
-                node.index = index;
-
                 if (info.status == ScrollRectStatus.Force && info.index.Equals(target))
                 {
                     flag |= ScrollRectEvent.Flag.SameAsInfo;
@@ -730,8 +728,14 @@ namespace ZG
 
                 //nodes[index] = node;
                 if (flag != 0)
+                {
+                    //Debug.Log($"[ScrollRect]{node.index.x} to {index.x}: {(int)info.status}-{info.index.x}");
+                    
                     ++result.version;
-                
+                }
+
+                node.index = index;
+
                 result.flag = flag;
                 result.index = node.index;
             }
