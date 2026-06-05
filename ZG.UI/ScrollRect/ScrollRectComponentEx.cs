@@ -15,7 +15,7 @@ namespace ZG
         public ScrollRectToggle toggleStyle;
 
         private bool __isMoving;
-        private int2 __selectedIndex = IndexNull;
+        //private int2 __selectedIndex = IndexNull;
         private IReadOnlyList<ISubmitHandler> __submitHandlers;
         private Dictionary<ISubmitHandler, ScrollRectToggle> __toggles;
 
@@ -114,7 +114,7 @@ namespace ZG
                             __toggles[submitHandler] = toggle;
                         }
 
-                        int2 temp = selectedIndex;
+                        int2 temp = this.index;//selectedIndex;
                         index = math.clamp(math.max(temp.x, temp.y), min, max);
                         submitHandler = __submitHandlers[index];
                         if (submitHandler != null &&
@@ -129,7 +129,7 @@ namespace ZG
                     }
                     else
                     {
-                        int2 temp = selectedIndex;
+                        int2 temp = this.index;//selectedIndex;
                         index = math.clamp(math.max(temp.x, temp.y), min, max);
                     }
 
@@ -163,13 +163,13 @@ namespace ZG
             }
         }
 
-        public int2 selectedIndex
+        /*public int2 selectedIndex
         {
             get
             {
                 return math.all(__selectedIndex == IndexNull) ? index : math.min(__selectedIndex, length - 1);
             }
-        }
+        }*/
 
         public int axis
         {
@@ -221,7 +221,7 @@ namespace ZG
 
         public void Move(int offset)
         {
-            int2 index = selectedIndex;
+            int2 index = this.index;//selectedIndex;
             index[axis] += offset;
 
             MoveTo(index);
@@ -247,18 +247,18 @@ namespace ZG
             {
                 __Update(math.max(source.x, source.y), math.max(destination.x, destination.y));
 
-                __selectedIndex = destination;
+                //__selectedIndex = destination;
             }
 
             base.MoveTo(destination);
         }
 
-        public override void UpdateData()
+        /*public override void UpdateData()
         {
             __selectedIndex = IndexNull;
 
             base.UpdateData();
-        }
+        }*/
 
         private void __OnChanged(float2 index)
         {
@@ -268,18 +268,18 @@ namespace ZG
         private void __OnChanged(int2 source)
         {
             int length = this.length;
-            bool isNull = math.all(__selectedIndex == IndexNull);
+            /*bool isNull = math.all(__selectedIndex == IndexNull);
             if (!isNull && !math.all(math.min(__selectedIndex, length - 1) == source))
                 return;
 
             if (isNull)
-            {
+            {*/
                 int index = math.clamp(math.max(source.x, source.y), 0, length - 1);
                 int2 destination = base.index;
                 __Update(math.max(destination.x, destination.y), index);
-            }
+            /*}
             else
-                __selectedIndex = IndexNull;
+                __selectedIndex = IndexNull;*/
         }
 
         private void __Update(int source, int destination)
